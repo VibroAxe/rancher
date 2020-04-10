@@ -1,0 +1,8 @@
+name: Organizr
+description: |
+          Organizr dashboard
+version: v0.0.1
+category: Utilities
+maintainer: James Kinsman
+license: GPL v3 License
+projectURL: "https://github.com/causefx/Organizr"

@@ -1,0 +1,32 @@
+version: '2'
+
+catalog:
+    name: organizr
+    version: 0.0.1
+#    upgrade_from: "<1.1.0"
+    description: "Organizr internet dashboard"
+    questions:
+        - variable: "HTTP_PORT"
+          label: HTTP Port
+          default: 80
+          required: true
+          type: int
+        - variable: "CONFIG_VOLUME"
+          label: Config Mount
+          default: /config
+          required: true
+          type: string
+        - variable: "PUID"
+          label: User ID
+          default: 5000
+          required: true
+          type: int
+        - variable: "PGID"
+          label: Group ID
+          default: 5003
+          required: true
+          type: int
+services:
+  organizr:
+    scale: 1
+    start_on_create: true
