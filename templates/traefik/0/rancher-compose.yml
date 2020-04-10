@@ -1,0 +1,28 @@
+version: '2'
+
+catalog:
+
+    name: traefik
+    version: 0.0.1
+#    upgrade_from: "<1.1.0"
+    description: "Docker aware reverse proxy"
+    questions:
+        - variable: "HTTP_PORT"
+          label: HTTP Port
+          default: 80
+          required: true
+          type: int
+        - variable: "HTTPS_PORT"
+          label: HTTPS Port
+          default: 443
+          required: true
+          type: int
+        - variable: "ADMIN_PORT"
+          label: Admin Interface Port
+          default: 8080
+          required: true
+          type: int
+services:
+  traefik:
+    scale: 1
+    start_on_create: true
