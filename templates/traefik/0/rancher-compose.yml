@@ -3,8 +3,8 @@ version: '2'
 catalog:
 
     name: traefik
-    version: 0.0.1
-#    upgrade_from: "<1.1.0"
+    version: 0.0.16
+    upgrade_from: "<0.0.8"
     description: "Docker aware reverse proxy"
     questions:
         - variable: "HTTP_PORT"
@@ -22,6 +22,16 @@ catalog:
           default: 8080
           required: true
           type: int
+        - variable: "TRAEFIK_CONFIG"
+          label: Where to store traefik config
+          default: /etc/traefik
+          required: true
+          type: string
+        - variable: "DEFAULT_TLD"
+          label: Default TLD for docker registrations
+          default: .content.tnnt.co.uk
+          required: false
+          type: string
 services:
   traefik:
     scale: 1
