@@ -1,5 +1,5 @@
----
-version: "2.1"
+version: '2'
+
 services:
   plex:
     image: linuxserver/plex
@@ -9,6 +9,8 @@ services:
       - VERSION=${PLEX_VERSION}
       - UMASK_SET=022 #optional
       - PLEX_CLAIM=${PLEX_CLAIM} #optional
+    ports:
+      - 32400:32400
     volumes:
       - ${CONFIG_VOLUME}:/config
       - ${MEDIA_VOLUME}:/media

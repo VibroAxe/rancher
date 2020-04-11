@@ -35,8 +35,8 @@ catalog:
               - docker
               - latest
               - public
-        - variable: "PLEX_GRANT"
-          label: Media location
+        - variable: "PLEX_CLAIM"
+          label: Plex claim token from https://plex.tv/claim
           default: 
           type: string
         - variable: "PLEX_HOST"
