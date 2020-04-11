@@ -1,0 +1,59 @@
+version: '2'
+
+services:
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    ports:
+       - "8090:8080" # port mapping
+    volumes:
+      - "${CONFIG_VOLUME}/sabnzbd:/config" # sabnzbd config dir
+      - "${MEDIA_VOLUME}/downloads/complete:/downloads" # completed directory for downloads. this contains the category directories
+      - "${MEDIA_VOLUME}/downloads/incomplete:/incomplete-downloads" # "temp" directory for downloads
+    environment:
+      TZ: UTC
+      PUID: ${PUID}
+      PGID: ${PGID}
+    labels:
+      #- traefik.http.routers.sabnzbd.service = sabnzbd
+      - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd${CONTENT_DOMAIN}`)
+      - traefik.http.routers.sabnzbd.tls=true
+      - traefik.http.routers.sabnzbd.tls.certresolver=letsencrypt
+      #- traefik.http.services.sabnzbd.loadbalancer.server.port=8080
+
+  radarr:
+    image: linuxserver/radarr
+    ports:
+       - "7878:7878" # port mapping 
+    volumes:
+      - "${CONFIG_VOLUME}/sonarr:/config" # radarr config dir
+      - "${MEDIA_VOLUME}/downloads/complete:/downloads" # completed downloads directory from sab
+      - "${MEDIA_VOLUME}/movies:/storage/Movies" # where radarr will copy your movies. add as many of these as you need
+    environment:
+      TZ: UTC
+      PUID: ${PUID}
+      PGID: ${PGID}
+    labels:
+      #- traefik.http.routers.radarr.service = radarr
+      - traefik.http.routers.radarr.rule=Host(`radarr${CONTENT_DOMAIN}`)
+      - traefik.http.routers.radarr.tls=true
+      - traefik.http.routers.radarr.tls.certresolver=letsencrypt
+      #- traefik.http.services.radarr.loadbalancer.server.port=7878
+
+  sonarr:
+    image: linuxserver/sonarr
+    ports:
+       - "8989:8989" # port mapping
+    volumes:
+      - "${CONFIG_VOLUME}/sonarr:/config" # sonarr config dir
+      - "${MEDIA_VOLUME}/downloads/complete:/downloads" # your completed downloads directory from sab
+      - "${MEDIA_VOLUME}/tv:/storage/TV" # where it will copy your files when done. add as many of these as you need
+    environment:
+      TZ: UTC
+      PUID: ${PUID}
+      PGID: ${PGID}
+    labels:
+      #- traefik.http.routers.sonarr.service = sonarr
+      - traefik.http.routers.sonarr.rule=Host(`sonarr${CONTENT_DOMAIN}`)
+      - traefik.http.routers.sonarr.tls=true
+      - traefik.http.routers.sonarr.tls.certresolver=letsencrypt
+      #- traefik.http.services.sonarr.loadbalancer.server.port=8989
