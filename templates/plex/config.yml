@@ -1,7 +1,7 @@
 name: Plex
 description: |
           Plex Media Server
-version: v0.0.1
+version: v0.0.2
 category: Media
 maintainer: James Kinsman
 projectURL: "https://docs.linuxserver.io/images/docker-plex"

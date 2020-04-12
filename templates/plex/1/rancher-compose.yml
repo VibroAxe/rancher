@@ -1,0 +1,50 @@
+version: '2'
+
+catalog:
+    name: plex
+    version: 0.0.2
+#    upgrade_from: "<1.1.0"
+    description: "Plex Media Server"
+    questions:
+        - variable: "CONFIG_VOLUME"
+          label: Config Location
+          default: /storage/root/docker/plex/config
+          required: true
+          type: string
+        - variable: "MEDIA_VOLUME"
+          label: Media location
+          default: /storage/media
+          required: true
+          type: string
+        - variable: "PUID"
+          label: User ID
+          default: 5000
+          required: true
+          type: int
+        - variable: "PGID"
+          label: Group ID
+          default: 5003
+          required: true
+          type: int
+        - variable: "PLEX_VERSION"
+          label: Plex Version
+          default: docker
+          required: true
+          type: enum
+          options:
+              - docker
+              - latest
+              - public
+        - variable: "PLEX_CLAIM"
+          label: Plex claim token from https://plex.tv/claim
+          default: 
+          type: string
+        - variable: "PLEX_HOST"
+          label: Media location
+          default: "`plex.tnnt.co.uk`,`plex.content.tnnt.co.uk`"
+          type: string
+          required: true
+services:
+  plex:
+    scale: 1
+    start_on_create: true

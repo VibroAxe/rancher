@@ -1,7 +1,7 @@
 name: Traefik
 description: |
           Traefik loadbalancer
-version: v0.0.19
+version: v0.0.20
 category: Proxy
 maintainer: James Kinsman
 license: MIT License
