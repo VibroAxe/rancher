@@ -1,7 +1,7 @@
 name: Downloaders
 description: |
           Media downloaders
-version: v0.0.1
+version: v0.0.3
 category: Media
 maintainer: James Kinsman
 projectURL: "https://linuxserver.io/"
