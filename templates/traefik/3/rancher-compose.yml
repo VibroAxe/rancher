@@ -1,0 +1,37 @@
+version: '2'
+
+catalog:
+
+    name: traefik
+    version: 0.0.19
+    description: "Docker aware reverse proxy"
+    questions:
+        - variable: "HTTP_PORT"
+          label: HTTP Port
+          default: 80
+          required: true
+          type: int
+        - variable: "HTTPS_PORT"
+          label: HTTPS Port
+          default: 443
+          required: true
+          type: int
+        - variable: "ADMIN_PORT"
+          label: Admin Interface Port
+          default: 8080
+          required: true
+          type: int
+        - variable: "TRAEFIK_CONFIG"
+          label: Where to store traefik config
+          default: /etc/traefik
+          required: true
+          type: string
+        - variable: "DEFAULT_TLD"
+          label: Default TLD for docker registrations
+          default: .content.tnnt.co.uk
+          required: false
+          type: string
+services:
+  traefik:
+    scale: 1
+    start_on_create: true
