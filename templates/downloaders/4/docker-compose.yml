@@ -40,6 +40,23 @@ services:
       - traefik.http.routers.qbittorrent.tls.certresolver=letsencrypt
       - traefik.http.routers.qbittorrent.middlewares=organizr-coadmin
 
+  jackett:
+    image: linuxserver/qbittorrent
+    ports:
+       - "9117:9117" # port mapping
+    volumes:
+      - "${CONFIG_VOLUME}/jackett:/config" # sonarr config dir
+    environment:
+      TZ: UTC
+      PUID: ${PUID}
+      PGID: ${PGID}
+    labels:
+      - traefik.provider=rancher
+      - traefik.http.routers.jackett.rule=Host(`jackett${CONTENT_DOMAIN}`)
+      - traefik.http.routers.jackett.tls=true
+      - traefik.http.routers.jackett.tls.certresolver=letsencrypt
+      - traefik.http.routers.jackett.middlewares=organizr-coadmin
+
   radarr:
     image: linuxserver/radarr
     ports:
