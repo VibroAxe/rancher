@@ -41,7 +41,7 @@ services:
       - traefik.http.routers.qbittorrent.middlewares=organizr-coadmin
 
   jackett:
-    image: linuxserver/qbittorrent
+    image: linuxserver/jackett
     ports:
        - "9117:9117" # port mapping
     volumes:
