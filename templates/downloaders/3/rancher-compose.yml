@@ -1,0 +1,45 @@
+version: '2'
+
+catalog:
+    name: Downloaders
+    version: 0.0.5
+    description: "Media Downloaders from LinuxServer.io"
+    questions:
+        - variable: "CONFIG_VOLUME"
+          label: Config Location
+          default: /storage/root/docker/downloaders
+          required: true
+          type: string
+        - variable: "MEDIA_VOLUME"
+          label: Media location
+          default: /storage/media
+          required: true
+          type: string
+        - variable: "PUID"
+          label: User ID
+          default: 5000
+          required: true
+          type: int
+        - variable: "PGID"
+          label: Group ID
+          default: 5003
+          required: true
+          type: int
+        - variable: "CONTENT_DOMAIN"
+          label: Content domain
+          default: ".content.tnnt.co.uk"
+          type: string
+          required: true
+services:
+  sabnzbd:
+    scale: 1
+    start_on_create: true
+  radarr:
+    scale: 1
+    start_on_create: true
+  sonarr:
+    scale: 1
+    start_on_create: true
+  qbittorrent:
+    scale: 1
+    start_on_create: true
